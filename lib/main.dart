@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yuma_test/login/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,9 +15,10 @@ class MyApp extends StatelessWidget {
       title: 'Test',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(),
+      //home: const MyHomePage(),
+      home: Login(),
     );
   }
 }
