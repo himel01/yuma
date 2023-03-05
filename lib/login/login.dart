@@ -34,7 +34,7 @@ class _LoginState extends State<Login> {
                       height: getHeight(context) * 0.14,
                     ),
                     Center(
-                      child: Text("Yuma Tech",
+                      child: Text("Sign In",
                           style: TextStyle(
                               fontSize: getHeight(context) * 0.05,
                               fontWeight: FontWeight.bold)),
@@ -44,8 +44,8 @@ class _LoginState extends State<Login> {
                     ),
                     TextField(
                       controller: provider.userController,
-                      keyboardType: TextInputType.phone,
-                      inputFormatters: [LengthLimitingTextInputFormatter(11)],
+                      //keyboardType: TextInputType.phone,
+                      //inputFormatters: [LengthLimitingTextInputFormatter(11)],
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
                           labelText: "User Name",
@@ -59,7 +59,7 @@ class _LoginState extends State<Login> {
                     ),
                     TextFormField(
                       controller: provider.passwordController,
-                      keyboardType: TextInputType.number,
+                      //keyboardType: TextInputType.number,
                       obscureText: !provider.passwordVisible,
                       decoration: InputDecoration(
                         labelText: 'Password',
@@ -106,7 +106,7 @@ class _LoginState extends State<Login> {
                         ),
                         InkWell(
                           onTap: (){
-
+                            provider.toRegistration(context);
                           },
                           child: Text("Sign Up ",
                               style: TextStyle(
