@@ -7,14 +7,8 @@ class MainProvider extends ChangeNotifier{
     getPermission;
   }
   getPermission() async {
-    // AwesomeNotifications().setListeners(
-    //     onActionReceivedMethod:         NotificationController.onActionReceivedMethod,
-    //     onNotificationCreatedMethod:    NotificationController.onNotificationCreatedMethod,
-    //     onNotificationDisplayedMethod:  NotificationController.onNotificationDisplayedMethod,
-    //     onDismissActionReceivedMethod:  NotificationController.onDismissActionReceivedMethod
-    // );
-    bool isallowed = await AwesomeNotifications().isNotificationAllowed();
-    if (!isallowed) {
+    bool isAllowed = await AwesomeNotifications().isNotificationAllowed();
+    if (!isAllowed) {
       //no permission of local notification
       AwesomeNotifications().requestPermissionToSendNotifications();
     }
@@ -24,7 +18,7 @@ class MainProvider extends ChangeNotifier{
     AwesomeNotifications().createNotification(
         content: NotificationContent(
           id: 123,
-          channelKey: 'basic', //set configuration wuth key "basic"
+          channelKey: 'basic',
           title: 'Welcome',
           body: 'A simple notification is from Flutter App',
         )

@@ -22,7 +22,7 @@ class _SignUpState extends State<SignUp> {
             child: Container(
               height: getHeight(context),
               width: getWidth(context),
-              padding: EdgeInsets.only(left: 20, right: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,14 +45,14 @@ class _SignUpState extends State<SignUp> {
                       //keyboardType: TextInputType.phone,
                       //inputFormatters: [LengthLimitingTextInputFormatter(11)],
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: "First Name",
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green),
                           ),
                           labelStyle: TextStyle(fontSize: 16)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextField(
@@ -60,14 +60,14 @@ class _SignUpState extends State<SignUp> {
                       //keyboardType: TextInputType.phone,
                       //inputFormatters: [LengthLimitingTextInputFormatter(11)],
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: "Last Name",
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green),
                           ),
                           labelStyle: TextStyle(fontSize: 16)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextField(
@@ -75,14 +75,14 @@ class _SignUpState extends State<SignUp> {
                       //keyboardType: TextInputType.phone,
                       //inputFormatters: [LengthLimitingTextInputFormatter(11)],
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: "Email",
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green),
                           ),
                           labelStyle: TextStyle(fontSize: 16)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextField(
@@ -90,21 +90,21 @@ class _SignUpState extends State<SignUp> {
                       //keyboardType: TextInputType.phone,
                       //inputFormatters: [LengthLimitingTextInputFormatter(11)],
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: "User Name",
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green),
                           ),
                           labelStyle: TextStyle(fontSize: 16)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextFormField(
                       controller: provider.passwordController,
                       //keyboardType: TextInputType.number,
                       //obscureText: !provider.passwordVisible,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Password',
                         labelStyle: TextStyle(fontSize: 16),
                         // suffixIcon: IconButton(
@@ -122,17 +122,17 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(
                       height: getHeight(context) * (0.08),
                     ),
-                    Container(
+                    SizedBox(
                       height: getHeight(context) * 0.05,
                       width: getWidth(context) * 0.6,
                       child: ElevatedButton(
-                        child: Text('Sign Up'),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.green,
+                          backgroundColor: Colors.green,
                         ),
                         onPressed: () {
                            provider.register(context);
                         },
+                        child: const Text('Sign Up'),
                       ),
                     ),
                     SizedBox(

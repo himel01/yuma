@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:yuma_test/api_service/apis.dart';
 
 import '../utils/screen_size.dart';
 import 'login_provider.dart';
@@ -24,7 +22,7 @@ class _LoginState extends State<Login> {
             child: Container(
               height: getHeight(context),
               width: getWidth(context),
-              padding: EdgeInsets.only(left: 20, right: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,26 +42,23 @@ class _LoginState extends State<Login> {
                     ),
                     TextField(
                       controller: provider.userController,
-                      //keyboardType: TextInputType.phone,
-                      //inputFormatters: [LengthLimitingTextInputFormatter(11)],
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: "User Name",
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.green),
                           ),
                           labelStyle: TextStyle(fontSize: 16)),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextFormField(
                       controller: provider.passwordController,
-                      //keyboardType: TextInputType.number,
                       obscureText: !provider.passwordVisible,
                       decoration: InputDecoration(
                         labelText: 'Password',
-                        labelStyle: TextStyle(fontSize: 16),
+                        labelStyle: const TextStyle(fontSize: 16),
                         suffixIcon: IconButton(
                           icon: Icon(
                             provider.passwordVisible
@@ -79,17 +74,17 @@ class _LoginState extends State<Login> {
                     SizedBox(
                       height: getHeight(context) * (0.08),
                     ),
-                    Container(
+                    SizedBox(
                       height: getHeight(context) * 0.05,
                       width: getWidth(context) * 0.6,
                       child: ElevatedButton(
-                        child: Text('Sign In'),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.green,
+                          backgroundColor: Colors.green,
                         ),
                         onPressed: () {
                           provider.login(context);
                         },
+                        child: const Text('Sign In'),
                       ),
                     ),
                     SizedBox(

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:yuma_test/api_service/login_response_model.dart';
 
 class Api {
@@ -17,8 +18,11 @@ class Api {
         },
       ),
     );
-    print(response.statusCode);
-    print(response.data);
+    if (kDebugMode) {
+      print(response.statusCode);
+      print(response.data);
+    }
+
 
     if (response.statusCode == 200) {
       data = LoginResponse.fromJson(response.data);
@@ -37,10 +41,10 @@ class Api {
       response = await dio.post(
         "$baseUrl/consumer/register",
         data: {
-          "username": "test2",
-          "password": "pass2",
-          "email": "test2@gmail.com",
-          "profile": {"first_name": "testName1", "last_name": "testName2"}
+          "username": user,
+          "password": pass,
+          "email": email,
+          "profile": {"first_name": firstName, "last_name": lastName}
         },
         options: Options(
           headers: {
@@ -50,12 +54,17 @@ class Api {
         ),
       );
     } catch (e) {
-      print("exception is " + e.toString());
+      if (kDebugMode) {
+        print("exception is $e");
+      }
     }
 
-    print(response.statusCode);
-    print(response.data);
-    print(response.statusMessage); // completed
+    if (kDebugMode) {
+      print(response.statusCode);
+      print(response.data);
+      print(response.statusMessage);// completed
+    }
+
     if (response.statusCode == 201) {
       data = "success";
     } else {

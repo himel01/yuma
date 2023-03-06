@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:yuma_test/main.dart';
 import 'package:yuma_test/registration/registration.dart';
@@ -21,12 +22,16 @@ class LoginProvider extends ChangeNotifier {
     userInfo = await CacheData.getUserData("user");
     if (userInfo.isEmpty) {
       // no previous user
-      print("empty");
+      if (kDebugMode) {
+        print("empty");
+      }
     } else {
       userController.text = userInfo[0];
       passwordController.text = userInfo[1]; //bad practice
       notifyListeners();
-      print("not empty");
+      if (kDebugMode) {
+        print("not empty");
+      }
     }
   }
 
@@ -36,37 +41,67 @@ class LoginProvider extends ChangeNotifier {
   }
 
   login(BuildContext context) async {
-    response = await Api().login(userController.text, passwordController.text);
-    if (response != null) {
-      print(response?.consumerUuid);
-      print(response?.sessionId);
-      //save data and continue to home page
-      bool isSaved = await CacheData.saveUserData(
-          "user", [userController.text, passwordController.text]);
-      if (isSaved) {
-        Navigator.push(context, MaterialPageRoute(builder: (ctx) {
-          return MyHomePage();
-        }));
-      } else {
-        await CacheData.saveUserData(
+    if(validate(userController.text, passwordController.text)){
+      response = await Api().login(userController.text, passwordController.text);
+      if (response != null) {
+        if (kDebugMode) {
+          print(response?.consumerUuid);
+          print(response?.sessionId);
+        }
+
+        //save data and continue to home page
+        bool isSaved = await CacheData.saveUserData(
             "user", [userController.text, passwordController.text]);
-        Navigator.push(context, MaterialPageRoute(builder: (ctx) {
-          return MyHomePage();
-        }));
+        if (isSaved) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (ctx) {
+                return const MyHomePage();
+              },
+            ),
+          );
+        } else {
+          await CacheData.saveUserData(
+              "user", [userController.text, passwordController.text]);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (ctx) {
+                return const MyHomePage();
+              },
+            ),
+          );
+        }
+      } else {
+        //error
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Error!! Try later"),
+          ),
+        );
       }
-    } else {
-      //error
+    }else{
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Error!! Try later"),
+        const SnackBar(
+          content: Text("Can't proceed with empty fields!"),
         ),
       );
     }
+
   }
 
   toRegistration(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (ctx) {
-      return SignUp();
+      return const SignUp();
     }));
+  }
+
+  bool validate(String u,String p) {
+    if(u.isNotEmpty && p.isNotEmpty){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

@@ -7,7 +7,6 @@ import 'package:yuma_test/main_provider.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   AwesomeNotifications().initialize(
-    // set the icon to null if you want to use the default app icon
     'resource://drawable/icon',
     [
       NotificationChannel(
@@ -15,10 +14,10 @@ void main() {
           channelKey: 'basic',
           channelName: 'Basic notifications',
           channelDescription: 'Notification channel for basic tests',
-          defaultColor: Color(0xFF9D50DD),
+          defaultColor: const Color(0xFF9D50DD),
           ledColor: Colors.white)
     ],
-    // Channel groups are only visual and are not required
+
     channelGroups: [
       NotificationChannelGroup(
           channelGroupKey: 'basic_channel_group',
@@ -32,7 +31,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -42,7 +40,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       //home: const MyHomePage(),
-      home: Login(),
+      home: const Login(),
     );
   }
 }
@@ -73,18 +71,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       onPressed: () {
                         provider.showNotification();
                       },
-                      child: Text(
+                      child: const Text(
                         "Show Notification",
                       )),
                   ElevatedButton(
                       onPressed: () {
                         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
                           builder: (ctx) {
-                            return Login();
+                            return const Login();
                           },
                         ), (route) => false);
                       },
-                      child: Text(
+                      child: const Text(
                         "Logout",
                       ))
                 ],
